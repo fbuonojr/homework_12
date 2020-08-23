@@ -1,3 +1,5 @@
+
+
 USE employees;
 
 INSERT INTO department
@@ -18,12 +20,12 @@ VALUES
     ("HR Person", 80000, 3),
     ("IT Person", 70000, 4);
 
-INSERT INTO employees
+INSERT INTO employee
     (first_name, last_name, role_id, manager_id)
 VALUES
-    ("Erin", "Platvoet", 1, 101),
-    ("Manoli", "IDK", 2, 102),
+    ("Erin", "Platvoet", 1, 1),
+    ("Manoli", "IDK", 2, 2),
     ("Hojin", "M", 2, NULL),
     ("Thomas", "Chalanee", 2, NULL),
-    ("Kyle", "Andie", 3, 103),
-    ("Ed", "Gibbons", 4, 104);
+    ("Kyle", "Andie", 3, 3),
+    ("Ed", "Gibbons", 4, 4);
