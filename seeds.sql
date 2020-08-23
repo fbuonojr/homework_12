@@ -1,5 +1,3 @@
-
-
 USE employees;
 
 INSERT INTO department
@@ -11,7 +9,7 @@ VALUES
     ("IT");
 
 INSERT INTO role
-    (title, salary, department__id)
+    (title, salary, department_id)
 VALUES
     ("Salesperson", 100000, 1),
     ("Mechanical Engineer", 120000, 2),
@@ -21,9 +19,9 @@ VALUES
     ("IT Person", 70000, 4);
 
 INSERT INTO employees
-    (first_name, last_name, role_id, manager_id);
+    (first_name, last_name, role_id, manager_id)
 VALUES
-    ("Erin", "Platvoet", 1, 101)
+    ("Erin", "Platvoet", 1, 101),
     ("Manoli", "IDK", 2, 102),
     ("Hojin", "M", 2, NULL),
     ("Thomas", "Chalanee", 2, NULL),
