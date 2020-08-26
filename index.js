@@ -26,7 +26,8 @@ var optionsList = [
             "Add an employee",
             "Add a department",
             "Add a role",
-            "Update employee role"
+            "Update employee role",
+            "Quit"
         ],
         name: "choice",
         message: "Which kind of employee are you?"
@@ -50,6 +51,8 @@ function init() {
             case "Update employee role":
                 updateRole();
                 break;
+            case "Quit":
+                break;
         }
     });
 }
@@ -64,7 +67,6 @@ function showEmployees() {
             });
         });
     })
-    init();
 }
 
 function addDepartments() {
@@ -118,7 +120,10 @@ function updateRole() {
         ]).then(function (answer) {
             var changeID = roleIDArr[roleArr.indexOf(answer.newRole)];
             var query = "UPDATE employee SET role_id = ? WHERE ?";
-            connection.query(query, [changeID , { id: answer.employeeId }], function(err, res){ if (err) throw err });
+            connection.query(query, [changeID , { id: answer.employeeId }], function(err, res){
+                if (err) throw err;
+                // init();
+            });
         });
     });
 }
