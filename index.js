@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
     user: "root",
 
     // Your password
-    password: "",
+    password: "Verr2171#",
     database: "employees"
 });
 
@@ -45,6 +45,10 @@ connection.connect(function (err) {
 function showEmployees(){
     var query = "SELECT * FROM employee";
     connection.query(query, function(err, res){
-        console.log(response);
+        res.forEach(obj => {
+            var roleQuery = "SELECT title FROM role WHERE ?";
+            connection.query(roleQuery, { id: obj.role_id }, )
+            console.log("id: ", obj.id, " first name: ", obj.first_name, " last name: ", obj.last_name, " role id: ", obj.role_id, " manager id: ", obj.manager_id);
+        });
     })
 }
