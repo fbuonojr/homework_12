@@ -1,5 +1,6 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
+const { title } = require("process");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -33,22 +34,26 @@ var optionsList = [
 
 connection.connect(function (err) {
     if (err) throw err;
-    inquirer.prompt(optionsList).then(function(response){
-        switch(response.choice){
+    inquirer.prompt(optionsList).then(function (response) {
+        switch (response.choice) {
             case "View all employees":
                 showEmployees();
-            break;
+                break;
+            case "Add a department":
+                addDepartments();
+                break;
         }
     });
 })
 
-function showEmployees(){
+function showEmployees() {
     var query = "SELECT * FROM employee";
-    connection.query(query, function(err, res){
+    connection.query(query, function (err, res) {
         res.forEach(obj => {
-            var roleQuery = "SELECT title FROM role WHERE ?";
-            connection.query(roleQuery, { id: obj.role_id }, )
-            console.log("id: ", obj.id, " first name: ", obj.first_name, " last name: ", obj.last_name, " role id: ", obj.role_id, " manager id: ", obj.manager_id);
+            var roleQuery = "SELECT title, salary FROM role WHERE ?";
+            connection.query(roleQuery, { id: obj.role_id }, function (err, res2) {
+                console.log("id: ", obj.id, " name: ", obj.first_name, " ", obj.last_name, " role: ", res2[0].title, " salary: ", res2[0].salary, " manager id: ", obj.manager_id);
+            });
         });
     })
 }
