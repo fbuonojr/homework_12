@@ -25,7 +25,8 @@ var optionsList = [
             "View employees by Manager",
             "Add an employee",
             "Add a department",
-            "Add a role"
+            "Add a role",
+            "Update employee role"
         ],
         name: "choice",
         message: "Which kind of employee are you?"
@@ -42,6 +43,9 @@ connection.connect(function (err) {
             case "Add a department":
                 addDepartments();
                 break;
+            case "Update employee role":
+                updateRole();
+                break;
         }
     });
 })
@@ -55,5 +59,38 @@ function showEmployees() {
                 console.log("id: ", obj.id, " name: ", obj.first_name, " ", obj.last_name, " role: ", res2[0].title, " salary: ", res2[0].salary, " manager id: ", obj.manager_id);
             });
         });
+    })
+}
+
+function addDepartments(){
+    inquirer.prompt({
+        name: "departmentAdd",
+        type: "input",
+        message: "Enter name of department to be added"
+    }).then(function(answer){
+        var query = "INSERT INTO department (name) VALUES (?)";
+        connection.query(query, answer.departmentAdd, function(err, res){ if(err) throw err; });
+        var display = "SELECT * FROM department";
+        connection.query(display, function(err, res){
+            res.forEach(obj => {
+                console.log(obj.name);
+            })
+        })
+    });
+}
+
+function updateRole(){
+    showEmployees();
+    var idArr = [];
+    var idQuery = "SELECT id FROM employee";
+    connection.query(idQuery, function(err, res){
+        res.forEach(obj => {
+            idArr.push(obj.id);
+        });
+    });
+    inquirer.prompt({
+        name: "employeeId",
+        type: "list",
+        choices: 
     })
 }
