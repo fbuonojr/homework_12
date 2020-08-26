@@ -35,6 +35,10 @@ var optionsList = [
 
 connection.connect(function (err) {
     if (err) throw err;
+    init();
+})
+
+function init() {
     inquirer.prompt(optionsList).then(function (response) {
         switch (response.choice) {
             case "View all employees":
@@ -48,7 +52,7 @@ connection.connect(function (err) {
                 break;
         }
     });
-})
+}
 
 function showEmployees() {
     var query = "SELECT * FROM employee";
@@ -60,18 +64,19 @@ function showEmployees() {
             });
         });
     })
+    init();
 }
 
-function addDepartments(){
+function addDepartments() {
     inquirer.prompt({
         name: "departmentAdd",
         type: "input",
         message: "Enter name of department to be added"
-    }).then(function(answer){
+    }).then(function (answer) {
         var query = "INSERT INTO department (name) VALUES (?)";
-        connection.query(query, answer.departmentAdd, function(err, res){ if(err) throw err; });
+        connection.query(query, answer.departmentAdd, function (err, res) { if (err) throw err; });
         var display = "SELECT * FROM department";
-        connection.query(display, function(err, res){
+        connection.query(display, function (err, res) {
             res.forEach(obj => {
                 console.log(obj.name);
             })
@@ -79,18 +84,41 @@ function addDepartments(){
     });
 }
 
-function updateRole(){
-    showEmployees();
+function updateRole() {
     var idArr = [];
-    var idQuery = "SELECT id FROM employee";
-    connection.query(idQuery, function(err, res){
+    var roleArr = [];
+    var roleIDArr = [];
+    var roleQuery = "SELECT * FROM role";
+    connection.query(roleQuery, function (err, res) {
         res.forEach(obj => {
+            roleArr.push(obj.title);
+            roleIDArr.push(obj.id);
+        })
+    })
+    var idQuery = "SELECT * FROM employee";
+    connection.query(idQuery, function (err, res) {
+        res.forEach(obj => {
+            console.log("id: ", obj.id, " name: ", obj.first_name, " ", obj.last_name);
             idArr.push(obj.id);
         });
+
+        inquirer.prompt([
+            {
+                name: "employeeId",
+                type: "list",
+                choices: idArr,
+                message: "Select ID of employee you want to change role for"
+            },
+            {
+                name: "newRole",
+                type: "list",
+                choices: roleArr,
+                message: "Select new role for employee"
+            }
+        ]).then(function (answer) {
+            var changeID = roleIDArr[roleArr.indexOf(answer.newRole)];
+            var query = "UPDATE employee SET role_id = ? WHERE ?";
+            connection.query(query, [changeID , { id: answer.employeeId }], function(err, res){ if (err) throw err });
+        });
     });
-    inquirer.prompt({
-        name: "employeeId",
-        type: "list",
-        choices: 
-    })
 }
