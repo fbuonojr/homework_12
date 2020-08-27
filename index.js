@@ -1,6 +1,6 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
-const { title } = require("process");
+const { title, allowedNodeEnvironmentFlags } = require("process");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -55,7 +55,10 @@ function init() {
                 addEmployee();
                 break;
             case "Add a department":
-                addDepartments();
+                addDepartment();
+                break;
+            case "Add a role":
+                addRole();
                 break;
             case "Update employee role":
                 updateRole();
