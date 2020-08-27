@@ -126,13 +126,7 @@ function addDepartments() {
         message: "Enter name of department to be added"
     }).then(function (answer) {
         var query = "INSERT INTO department (name) VALUES (?)";
-        connection.query(query, answer.departmentAdd, function (err, res) { if (err) throw err; });
-        var display = "SELECT * FROM department";
-        connection.query(display, function (err, res) {
-            res.forEach(obj => {
-                console.log(obj.name);
-            })
-        })
+        connection.query(query, answer.departmentAdd, showDepartments);
     });
 }
 
