@@ -5,16 +5,16 @@ dotenv.config();
 const { title, allowedNodeEnvironmentFlags } = require("process");
 
 var connection = mysql.createConnection({
-    host: "localhost",
+    host: process.env.DB_HOST,
 
     // Your port; if not 3306
     port: 3306,
 
     // Your username
-    user: "root",
+    user: process.env.DB_USER,
 
     // Your password
-    password: "",
+    password: process.env.DB_PASS,
     database: "employees"
 });
 
