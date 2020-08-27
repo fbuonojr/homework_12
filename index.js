@@ -1,5 +1,7 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
+var dotenv = require("dotenv")
+dotenv.config();
 const { title, allowedNodeEnvironmentFlags } = require("process");
 
 var connection = mysql.createConnection({
