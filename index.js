@@ -157,8 +157,10 @@ function addRole() {
             message: "Enter department ID"
         }
     ]).then(function(answer){
-        console.log(typeof answer.idAdd);
-        console.log(typeof answer.sAdd);
+        var intS = parseInt(answer.sAdd);
+        var intId = parseInt(answer.idAdd);
+        console.log(typeof intS);
+        console.log(typeof intId);
     })
 }
 
