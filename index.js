@@ -30,12 +30,18 @@ var optionsList = [
             "Quit"
         ],
         name: "choice",
-        message: "Which kind of employee are you?"
+        message: "What would you like to do?"
     }
 ];
 
 connection.connect(function (err) {
     if (err) throw err;
+    console.log("------------------------------");
+    console.log("-----------Employee-----------");
+    console.log("-----------Tracking-----------");
+    console.log("-----------Application--------");
+    console.log("------------------------------");
+
     init();
 })
 
