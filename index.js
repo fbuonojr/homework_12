@@ -21,8 +21,8 @@ var optionsList = [
         type: "list",
         choices: [
             "View all employees",
-            "View employees by department",
-            "View employees by Manager",
+            "View all departments",
+            "View all roles",
             "Add an employee",
             "Add a department",
             "Add a role",
@@ -44,6 +44,9 @@ function init() {
         switch (response.choice) {
             case "View all employees":
                 showEmployees();
+                break;
+            case "View all departments":
+                showDepartments();
                 break;
             case "Add a department":
                 addDepartments();
@@ -67,6 +70,15 @@ function showEmployees() {
             });
         });
     })
+}
+
+function showDepartments() {
+    var query = "SELECT * FROM department";
+    connection.query(query, function (err, res) {
+        res.forEach(obj => {
+            console.log(obj.name);
+        });
+    });
 }
 
 function addDepartments() {
@@ -122,7 +134,6 @@ function updateRole() {
             var query = "UPDATE employee SET role_id = ? WHERE ?";
             connection.query(query, [changeID , { id: answer.employeeId }], function(err, res){
                 if (err) throw err;
-                // init();
             });
         });
     });
