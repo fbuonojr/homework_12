@@ -87,12 +87,35 @@ function showDepartments() {
     });
 }
 
-function showRoles(){
+function showRoles() {
     var query = "SELECT * FROM role";
-    connection.query(query, function(err, res){
+    connection.query(query, function (err, res) {
         res.forEach(obj => {
             console.log("Title: ", obj.title, " Salary: ", obj.salary);
         })
+    })
+}
+
+function addEmployee() {
+    inquirer.prompt([
+        {
+            name: "fAdd",
+            type: "input",
+            message: "Enter employee first name" 
+        },
+        {
+            name: "lAdd",
+            type: "input",
+            message: "Enter employee last name"
+        },
+        {
+            name: "rAdd",
+            type: "input",
+            message: "Enter role id"
+        }
+    ]).then(function(answer) {
+        var query = "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)";
+        connection.query(query, [answer.fAdd, answer.lAdd, answer.rAdd, null], showEmployees);
     })
 }
 
@@ -147,7 +170,7 @@ function updateRole() {
         ]).then(function (answer) {
             var changeID = roleIDArr[roleArr.indexOf(answer.newRole)];
             var query = "UPDATE employee SET role_id = ? WHERE ?";
-            connection.query(query, [changeID , { id: answer.employeeId }], function(err, res){
+            connection.query(query, [changeID, { id: answer.employeeId }], function (err, res) {
                 if (err) throw err;
             });
         });
