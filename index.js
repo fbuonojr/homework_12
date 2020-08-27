@@ -51,6 +51,9 @@ function init() {
             case "View all roles":
                 showRoles();
                 break;
+            case "Add an employee":
+                addEmployee();
+                break;
             case "Add a department":
                 addDepartments();
                 break;
