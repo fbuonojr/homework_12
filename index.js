@@ -159,8 +159,8 @@ function addRole() {
     ]).then(function(answer){
         var intS = parseInt(answer.sAdd);
         var intId = parseInt(answer.idAdd);
-        console.log(typeof intS);
-        console.log(typeof intId);
+        var query = "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)";
+        connection.query(query, [answer.tAdd, intS, intId], showRoles);
     })
 }
 
