@@ -39,7 +39,7 @@ connection.connect(function (err) {
     console.log("------------------------------");
     console.log("-----------Employee-----------");
     console.log("-----------Tracking-----------");
-    console.log("-----------Application--------");
+    console.log("----------Application---------");
     console.log("------------------------------");
 
     init();
@@ -128,7 +128,7 @@ function addEmployee() {
     })
 }
 
-function addDepartments() {
+function addDepartment() {
     inquirer.prompt({
         name: "departmentAdd",
         type: "input",
@@ -137,6 +137,29 @@ function addDepartments() {
         var query = "INSERT INTO department (name) VALUES (?)";
         connection.query(query, answer.departmentAdd, showDepartments);
     });
+}
+
+function addRole() {
+    inquirer.prompt([
+        {
+            name: "tAdd",
+            type: "input",
+            message: "Enter role title"
+        },
+        {
+            name: "sAdd",
+            type: "input",
+            message: "Enter salary"
+        },
+        {
+            name: "idAdd",
+            type: "input",
+            message: "Enter department ID"
+        }
+    ]).then(function(answer){
+        console.log(typeof answer.idAdd);
+        console.log(typeof answer.sAdd);
+    })
 }
 
 function updateRole() {
