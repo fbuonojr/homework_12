@@ -48,6 +48,9 @@ function init() {
             case "View all departments":
                 showDepartments();
                 break;
+            case "View all roles":
+                showRoles();
+                break;
             case "Add a department":
                 addDepartments();
                 break;
@@ -79,6 +82,15 @@ function showDepartments() {
             console.log(obj.name);
         });
     });
+}
+
+function showRoles(){
+    var query = "SELECT * FROM role";
+    connection.query(query, function(err, res){
+        res.forEach(obj => {
+            console.log("Title: ", obj.title, " Salary: ", obj.salary);
+        })
+    })
 }
 
 function addDepartments() {
