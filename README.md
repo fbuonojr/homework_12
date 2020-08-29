@@ -140,4 +140,8 @@ You are required to submit the following:
 
 ## Technologies Used: JavaScript, SQL, Inquirer
 
+I am still working on fixing it so I can make another selection without restarting the app.
+
+* Link to video of application: https://drive.google.com/file/d/1Rdqv32Q3VErN14QWXZH6Re2E-3-zMwnG/view
+
 * Link to GitHub Repository: https://github.com/fbuonojr/homework_12
